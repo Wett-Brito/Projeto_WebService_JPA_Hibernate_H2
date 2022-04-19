@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wellington.curso.entities.Order;
-import com.wellington.curso.entities.User;
 import com.wellington.curso.services.OrderService;
 
 @RestController
