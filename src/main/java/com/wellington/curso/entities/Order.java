@@ -88,7 +88,6 @@ public class Order implements Serializable{
 		}
 	}
 	
-	@JsonIgnore
 	public Payment getPayment() {
 		return payment;
 	}
@@ -125,6 +124,16 @@ public class Order implements Serializable{
 	
 	public Order() {
 		
+	}
+	
+	public Double getTotal() {
+		
+		Double total = 0.0;
+		
+		for(OrderItem x : items) {
+			total += x.getSubTotal();
+		}
+		return total;
 	}
 	
 }

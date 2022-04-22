@@ -16,7 +16,6 @@ public class OrderItem implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-
 	@EmbeddedId
 	private OrderItemPk id = new OrderItemPk();
 	
@@ -86,6 +85,8 @@ public class OrderItem implements Serializable{
 		return Objects.equals(id, other.id);
 	}
 	
-	
+	public Double getSubTotal() {
+		return price * quantity;
+	}
 	
 }
