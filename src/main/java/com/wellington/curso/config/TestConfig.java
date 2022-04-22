@@ -11,12 +11,14 @@ import org.springframework.context.annotation.Profile;
 import com.wellington.curso.entities.Category;
 import com.wellington.curso.entities.Order;
 import com.wellington.curso.entities.OrderItem;
+import com.wellington.curso.entities.Payment;
 import com.wellington.curso.entities.Product;
 import com.wellington.curso.entities.User;
 import com.wellington.curso.entities.enums.OrderStatus;
 import com.wellington.curso.repositories.CategoryRepository;
 import com.wellington.curso.repositories.OrderItemRepository;
 import com.wellington.curso.repositories.OrderRepository;
+import com.wellington.curso.repositories.PaymentRepository;
 import com.wellington.curso.repositories.ProductRepository;
 import com.wellington.curso.repositories.UserRepository;
 
@@ -38,6 +40,9 @@ public class TestConfig implements CommandLineRunner{
 	
 	@Autowired
 	private OrderItemRepository orderItemRepository;
+	
+	@Autowired
+	private PaymentRepository paymentRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -86,6 +91,11 @@ public class TestConfig implements CommandLineRunner{
 		
 		
 		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4, oi5));
+				
+		Payment pay1 = new Payment(null, Instant.parse("2019-06-20T19:53:07Z"), o1);
+		o1.SetPayment(pay1);
+		orderRepository.save(o1);
+
 		
 	}
 }
