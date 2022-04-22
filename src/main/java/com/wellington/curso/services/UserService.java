@@ -29,4 +29,11 @@ public class UserService {
 		return reporistory.save(obj);
 	}
 	
+	public void delete(User obj) {
+		reporistory.delete(obj);
+	}
+	
+	public void deleteById(Long id) {
+		reporistory.deleteById(id);
+	}
 }
