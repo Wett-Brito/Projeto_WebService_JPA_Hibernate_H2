@@ -74,6 +74,7 @@ public class UserResource {
 	
 	@PutMapping()
 	public ResponseEntity<User> updateById(@RequestBody User obj){
+
 		obj = service.UpdateById(obj.getId() , obj);
 		
 		return ResponseEntity.ok().body(obj);
