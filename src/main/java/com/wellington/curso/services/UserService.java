@@ -29,8 +29,12 @@ public class UserService {
 	
 	public User findById(Long id) {
 		
-		Optional<User> obj = repository.findById(id);
-		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
+		try {
+			Optional<User> obj = repository.findById(id);
+			return obj.orElseThrow(() -> new ResourceNotFoundException(id));
+		} catch (RuntimeException e) {
+			throw new ResourceNotFoundException(id);
+		}
 	}
 	
 	public User insert(User obj) {

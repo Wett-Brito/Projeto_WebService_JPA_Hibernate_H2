@@ -18,7 +18,6 @@ import com.wellington.curso.entities.enums.OrderStatus;
 import com.wellington.curso.repositories.CategoryRepository;
 import com.wellington.curso.repositories.OrderItemRepository;
 import com.wellington.curso.repositories.OrderRepository;
-import com.wellington.curso.repositories.PaymentRepository;
 import com.wellington.curso.repositories.ProductRepository;
 import com.wellington.curso.repositories.UserRepository;
 
