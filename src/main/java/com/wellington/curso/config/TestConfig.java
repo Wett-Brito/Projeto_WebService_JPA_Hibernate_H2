@@ -41,9 +41,6 @@ public class TestConfig implements CommandLineRunner{
 	@Autowired
 	private OrderItemRepository orderItemRepository;
 	
-	@Autowired
-	private PaymentRepository paymentRepository;
-
 	@Override
 	public void run(String... args) throws Exception {
 		
