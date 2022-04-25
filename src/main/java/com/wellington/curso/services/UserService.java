@@ -3,14 +3,18 @@ package com.wellington.curso.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Service;
 
 import com.wellington.curso.entities.User;
 import com.wellington.curso.repositories.UserRepository;
 import com.wellington.curso.services.exceptions.DatabaseException;
+import com.wellington.curso.services.exceptions.NoIdException;
 import com.wellington.curso.services.exceptions.ResourceNotFoundException;
 
 @Service
@@ -53,14 +57,21 @@ public class UserService {
 	}
 	
 	public User UpdateById(Long id, User obj) {
-		User entity = repository.getById(id);
-		updateData(entity, obj);
-		return repository.save(entity);
+		try {
+			User entity = repository.getById(id);
+			updateData(entity, obj);
+			return repository.save(entity);
+		}catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}catch (InvalidDataAccessApiUsageException e) {
+			throw new NoIdException(e.getMessage());
+		}
 	}
 	
 	private void updateData(User entity, User obj) {
 		entity.setName(obj.getName());
 		entity.setEmail(obj.getEmail());
 		entity.setPhone(obj.getPhone());
+
 	}
 }
