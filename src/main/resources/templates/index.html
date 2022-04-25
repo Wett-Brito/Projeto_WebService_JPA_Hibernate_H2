@@ -8,7 +8,7 @@
 
 <BODY BGCOLOR="FFFFFF">
 
-<CENTER><IMG SRC="clouds.jpg" ALIGN="BOTTOM"> </CENTER>
+<CENTER><IMG SRC="images/java.jpg" width="40%" height="150" ALIGN="BOTTOM"> </CENTER>
 
 <HR>
 
@@ -22,12 +22,85 @@ wellingtonsantosbritos@gmail.com</a>.
 
 <P> Possiveis requests que a aplicação suporta:
 
-<P> <B>Get /users</B> </p>
+	<div style="background-color:B7B7B7;margin-bottom: 0; padding-top: 4px">
+		<p style="font-size:14px; padding-bottom: 0px;margin: 0;"><b> Busca todos so usuarios cadastrados</b></p>
+		<p style="color:green; margin: 0;"><b> Get /users</b></p>
+	</div>
+	
+	<div style="background-color:E1E1E1;margin-top: 0; padding-top: 4px">
+		<p style="font-size:14px; padding-bottom: 0px;margin: 0;"><b> Busca usuario por id, lembrar de remover os {}</b></p>
+		<p style="color:green; margin: 0;"><b> Get /users/{id}</b></p>
+	</div>
+	
+	<div style="background-color:B7B7B7;margin-bottom: 0; padding-top: 4px">
+		<p style="font-size:14px; padding-bottom: 0px;margin: 0;"><b> Deleta um usuario da base, lembrar de remover os {}</b></p>
+		<p style="color:red; margin: 0;"><b> Delete /users/{id}</b></p>
+	</div>
+	
+	<div style="background-color:E1E1E1;margin-top: 0; padding-top: 4px">
+		<p style="font-size:14px; padding-bottom: 0px;margin: 0;"><b> Adiciona um novo usuario na base</b></p>
+		<p style="color:orange; margin: 0;"><b> Post /users</b></p>
 
-	<p><b> Get /categories</b></p>
-	<p><b> Get /orders</b></p>
+		<p style = "padding-bottom: 8;margin-bottom: 0;"><i> { 
+	 				"name": "", 
+	 				"email": "", 
+	 				"phone": "", 
+					"password": "" 
+				} </i></p>
+	</div>
+			
+	<div style="background-color:B7B7B7; margin-top:0; padding-top: 4px">
+		<p style="font-size:14px; padding-bottom: 0px;margin: 0;"><b> Altera um usuario na base, lembrar de remover os {}</b></p>
+		<p style="color:blue; margin: 0;"><b> Put /users/{id}</b></p>
 
-<BR> <B><I>Entre outros que eu ainda não finalizei de esscrever</I></B>  
+		<p style="padding-bottom: 8;margin-bottom: 0;"><i> { 
+				 "name": "", 
+				 "email": "", 
+				 "phone": "" 
+				} </i></p>
+	</div>
+	
+	<div style="background-color:E1E1E1;margin-top: 0; padding-top: 4px">
+		<p style="font-size:14px; padding-bottom: 0px;margin: 0;"><b> Busca todas as categorias</b></p>
+		<p style="color:green; margin: 0;"><b> Get /categories</b></p>
+	</div>
+	
+	<div style="background-color:B7B7B7;margin-top: 0; padding-top: 4px">
+		<p style="font-size:14px; padding-bottom: 0px;margin: 0;"><b> Busca uma categoria por id, lembrar de remover os {}</b></p>
+		<p style="color:green; margin: 0;"><b> Get /categories/{id}</b></p>
+	</div>
+	
+	<div style="background-color:E1E1E1;margin-top: 0; padding-top: 4px">
+		<p style="font-size:14px; padding-bottom: 0px;margin: 0;"><b> Busca todas os pedidos</b></p>
+		<p style="color:green; margin: 0;"><b> Get /orders</b></p>
+	</div>
+	
+	<div style="background-color:B7B7B7;margin-top: 0; padding-top: 4px">
+		<p style="font-size:14px; padding-bottom: 0px;margin: 0;"><b> Busca uma categoria por id, lembrar de remover os {}</b></p>		
+		<p style="color:green; margin: 0;"><b> Get /orders/{id}</b></p>
+	</div>
+	
+	<div style="background-color:E1E1E1;margin-top: 0; padding-top: 4px">
+		<p style="font-size:14px; padding-bottom: 0px;margin: 0;"><b> Busca todas os pagamentos</b></p>
+		<p style="color:green; margin: 0;"><b> Get /payments</b></p>
+	</div>
+	
+	<div style="background-color:B7B7B7;margin-top: 0; padding-top: 4px">
+		<p style="font-size:14px; padding-bottom: 0px;margin: 0;"><b> Busca um pagamento por id, lembrar de remover os {}</b></p>		
+		<p style="color:green; margin: 0;"><b> Get /payments/{id}</b></p>
+	</div>
+	
+	<div style="background-color:E1E1E1;margin-top: 0; padding-top: 4px">
+		<p style="font-size:14px; padding-bottom: 0px;margin: 0;"><b> Busca todas os produtos</b></p>
+		<p style="color:green; margin: 0;"><b> Get /products</b></p>
+	</div>
+	
+	<div style="background-color:B7B7B7;margin-top: 0; padding-top: 4px">
+		<p style="font-size:14px; padding-bottom: 0px;margin: 0;"><b> Busca um produto por id, lembrar de remover os {}</b></p>			
+		<p style="color:green; margin: 0;"><b> Get /products/{id}</b></p>
+	</div>
+	
+<BR> <B><I>Entre outros que eu ainda não finalizei de codar</I></B>  
 
 <HR>
 
