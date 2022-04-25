@@ -2,6 +2,8 @@ package com.wellington.curso.resources;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.wellington.curso.dto.UserDTO;
 import com.wellington.curso.entities.User;
 import com.wellington.curso.services.UserService;
 
@@ -26,9 +29,10 @@ public class UserResource {
 	private UserService service;
 	
 	@GetMapping
-	public ResponseEntity<List<User>> findAll(){
+	public ResponseEntity<List<UserDTO>> findAll(){
 		List<User> list = service.findAll();
-		return ResponseEntity.ok().body(list);
+		List<UserDTO> listDto = list.stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
 	}
 	
 	@GetMapping(value = "/{id}")
@@ -70,6 +74,7 @@ public class UserResource {
 	
 	@PutMapping()
 	public ResponseEntity<User> updateById(@RequestBody User obj){
+
 		obj = service.UpdateById(obj.getId() , obj);
 		
 		return ResponseEntity.ok().body(obj);
