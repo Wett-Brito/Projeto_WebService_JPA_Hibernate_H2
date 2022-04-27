@@ -1,134 +1,279 @@
-<HTML>
+<!DOCTYPE html>
+<html lang="pt-br">
 
-<HEAD>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprendizado Spring JPA/Hibernate</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+        :root {
+            --background-light-color: #FDFDFD;
+            --background-color: #f7f7f7;
+            --light-text-color: #B1B1B1;
+            --dark-text-color: #676767;
+        }
 
-<TITLE>Aprendizado Spring JPA/Hibernate</TITLE>
+        *,
+        body {
+            margin: 0;
+            background-color: var(--background-light-color);
+            color: var(--dark-text-color);
+            font-family: Helvetica, sans-serif;
+        }
 
-</HEAD>  
+        #header-icons-text,
+        #header-icons-text * {
+            background-color: var(--background-color);
+        }
 
-<BODY BGCOLOR="FFFFFF">
+        #header-icons-text {
+            padding: 30px 40px;
+        }
 
-<CENTER><IMG SRC="https://mentorama.com.br/blog/wp-content/uploads/2021/03/java-para-que-serve-porque-preciso-dele.jpg" width="40%" height="150" ALIGN="BOTTOM"> </CENTER>
+        p#title {
+            color: var(--dark-text-color);
+            font-size: 1.5rem;
+            text-align: right;
+        }
 
-<HR>
+        p span#creator-name {
+            color: var(--light-text-color);
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+        }
 
-<H1>Site criado por Wellington Brito</H1>
+        a.icon {
+            float: right;
+            margin-left: 20px;
+        }
 
-<H2>Usando as tecnologias, {Spring Boot, JPA/Hibernate, Heroku, postgeSQL, H2}</H2>
 
-Envie-me um e-mail para  <a href="mailto:wellingtonsantosbritos@gmail.com">
+        #text-container {
+            padding: 40px 30px;
+        }
+        #text-container p {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
 
-wellingtonsantosbritos@gmail.com</a>.  
+        .endpoint-item,
+        .endpoint-item * {
+            padding: 10px 20px;
+            background-color: var(--background-color);
+        }
 
-<P> Possiveis requests que a aplicação suporta:
+        .endpoint-item::before {
+            width: 2px;
+            background-color: black;
+        }
 
-	<div style="background-color:B7B7B7;margin-bottom: 0; padding-top: 4px">
-		<p style="font-size:14px; padding-bottom: 0px;margin: 0;"><b> Busca todos so usuarios cadastrados</b></p>
-		<p style="color:green; margin: 0;"><b> Get /users</b></p>
-	</div>
-	
-	<div style="background-color:E1E1E1;margin-top: 0; padding-top: 4px">
-		<p style="font-size:14px; padding-bottom: 0px;margin: 0;"><b> Busca usuario por id, lembrar de remover os {}</b></p>
-		<p style="color:green; margin: 0;"><b> Get /users/{id}</b></p>
-	</div>
-	
-	<div style="background-color:B7B7B7;margin-bottom: 0; padding-top: 4px">
-		<p style="font-size:14px; padding-bottom: 0px;margin: 0;"><b> Deleta um usuario da base, lembrar de remover os {}</b></p>
-		<p style="color:red; margin: 0;"><b> Delete /users/{id}</b></p>
-	</div>
-	
-	<div style="background-color:E1E1E1;margin-top: 0; padding-top: 4px">
-		<p style="font-size:14px; padding-bottom: 0px;margin: 0;"><b> Adiciona um novo usuario na base</b></p>
-		<p style="color:orange; margin: 0;"><b> Post /users</b></p>
+        .endpoint-item {
+            border-radius: 0.3rem;
+            margin: 10px 0
+        }
 
-		<p style = "padding-bottom: 8;margin-bottom: 0;"><i> { 
-	 				"name": "", 
-	 				"email": "", 
-	 				"phone": "", 
-					"password": "" 
-				} </i></p>
-	</div>
-			
-	<div style="background-color:B7B7B7; margin-top:0; padding-top: 4px">
-		<p style="font-size:14px; padding-bottom: 0px;margin: 0;"><b> Altera um usuario na base, lembrar de remover os {}</b></p>
-		<p style="color:blue; margin: 0;"><b> Put /users/{id}</b></p>
+        .endpoint-item-verb {
+            padding: 2px;
+            margin: 0 5px 0 0;
+            border-width: 1px;
+            border-style: solid;
+            border-color: #aba;
+            border-radius: 3px;
+            color: var(--dark-text-color);
+            background-color: #aba;
+        }
 
-		<p style="padding-bottom: 8;margin-bottom: 0;"><i> { 
-				 "name": "", 
-				 "email": "", 
-				 "phone": "" 
-				} </i></p>
-	</div>
-	
-	<div style="background-color:E1E1E1;margin-top: 0; padding-top: 4px">
-		<p style="font-size:14px; padding-bottom: 0px;margin: 0;"><b> Busca todas as categorias</b></p>
-		<p style="color:green; margin: 0;"><b> Get /categories</b></p>
-	</div>
-	
-	<div style="background-color:B7B7B7;margin-top: 0; padding-top: 4px">
-		<p style="font-size:14px; padding-bottom: 0px;margin: 0;"><b> Busca uma categoria por id, lembrar de remover os {}</b></p>
-		<p style="color:green; margin: 0;"><b> Get /categories/{id}</b></p>
-	</div>
-	
-	<div style="background-color:E1E1E1;margin-top: 0; padding-top: 4px">
-		<p style="font-size:14px; padding-bottom: 0px;margin: 0;"><b> Adiciona uma nova categoria na base</b></p>
-		<p style="color:orange; margin: 0;"><b> Post /categories</b></p>
+        .endpoint-item-title{
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        .endpoint-item-uri{
+            font-size: 1rem;
+        }
+        .endpoint-item-body{
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+    </style>
+</head>
 
-		<p style = "padding-bottom: 8;margin-bottom: 0;"><i> { 
-			 "name": "", 
-			 "email": "", 
-			 "phone": "" 
-			} </i></p>
-	</div>
+<body>
+    <div class="container-fluid">
 
-	
-	<div style="background-color:B7B7B7;margin-top: 0; padding-top: 4px">
-		<p style="font-size:14px; padding-bottom: 0px;margin: 0;"><b> Busca todas os pedidos</b></p>
-		<p style="color:green; margin: 0;"><b> Get /orders</b></p>
-	</div>
-	
-	<div style="background-color:E1E1E1;margin-top: 0; padding-top: 4px">
-		<p style="font-size:14px; padding-bottom: 0px;margin: 0;"><b> Busca um pedido por id, lembrar de remover os {}</b></p>		
-		<p style="color:green; margin: 0;"><b> Get /orders/{id}</b></p>
-	</div>
-	
-	<div style="background-color:E1E1E1;margin-top: 0; padding-top: 4px">
-		<p style="font-size:14px; padding-bottom: 0px;margin: 0;"><b> Adiciona um novo pedido na base</b></p>
-		<p style="color:orange; margin: 0;"><b> Post /orders</b></p>
-		<p style = "padding-bottom: 8;margin-bottom: 0;"><i> 	{
-			"id": 1,
-			"moment": "", {ex: 2019-06-20T19::53:07Z}
-			"orderStatus": "", {WAINTING_PAYMENT, PAID, SHIPPED, DELIVERED, CANCELED}
-			    "client": {
-			        "id": 
-			    }
-			} </i></p>
-	</div>	
+        <div id="header-icons-text" class="row">
+            <div class="col col-lg-2 offset-lg-10">
+                <a class="icon" target="_blank" href="mailto:wellingtonsantosbritos@gmail.com" id="gmail-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="32px" height="32px">
+                        <path
+                            d="M12,23.403V23.39V10.389L11.88,10.3h-0.01L9.14,8.28C7.47,7.04,5.09,7.1,3.61,8.56C2.62,9.54,2,10.9,2,12.41v3.602 L12,23.403z" />
+                        <path
+                            d="M38,23.39v0.013l10-7.391V12.41c0-1.49-0.6-2.85-1.58-3.83c-1.46-1.457-3.765-1.628-5.424-0.403L38.12,10.3L38,10.389V23.39 z" />
+                        <path
+                            d="M14,24.868l10.406,7.692c0.353,0.261,0.836,0.261,1.189,0L36,24.868V11.867L25,20l-11-8.133V24.868z" />
+                        <path d="M38,25.889V41c0,0.552,0.448,1,1,1h6.5c1.381,0,2.5-1.119,2.5-2.5V18.497L38,25.889z" />
+                        <path d="M12,25.889L2,18.497V39.5C2,40.881,3.119,42,4.5,42H11c0.552,0,1-0.448,1-1V25.889z" />
+                    </svg>
+                </a>
+                <a class="icon" target="_blank" href="https://github.com/Wett-Brito" id="github-icon">
+                    <svg aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="32px" height="32px"
+                        data-view-component="true" class="octicon octicon-mark-github">
+                        <path fill-rule="evenodd"
+                            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                        </path>
+                    </svg>
+                </a>
+                <a class="icon" target="_blank" id="linkedin-icon"
+                    href="https://www.linkedin.com/in/wellington-brito-b632ab135/">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 34" width="32px" height="32px"
+                        class="global-nav__logo">
+                        <path
+                            d="M34,2.5v29A2.5,2.5,0,0,1,31.5,34H2.5A2.5,2.5,0,0,1,0,31.5V2.5A2.5,2.5,0,0,1,2.5,0h29A2.5,2.5,0,0,1,34,2.5ZM10,13H5V29h5Zm.45-5.5A2.88,2.88,0,0,0,7.59,4.6H7.5a2.9,2.9,0,0,0,0,5.8h0a2.88,2.88,0,0,0,2.95-2.81ZM29,19.28c0-4.81-3.06-6.68-6.1-6.68a5.7,5.7,0,0,0-5.06,2.58H17.7V13H13V29h5V20.49a3.32,3.32,0,0,1,3-3.58h.19c1.59,0,2.77,1,2.77,3.52V29h5Z"
+                            fill="currentColor"></path>
+                    </svg>
+                </a>
+            </div>
+            <div class="col col-12">
+                <p id="title">
+                    <span id="creator-name">Site criado por Wellington Brito
+                    </span>
+                    <br>
+                    Usando as tecnologias: <strong>Spring Boot, JPA/Hibernate, Heroku, postgeSQL, H2</strong>
+                </p>
+            </div>
+        </div>
 
-	<div style="background-color:B7B7B7;margin-top: 0; padding-top: 4px">
-		<p style="font-size:14px; padding-bottom: 0px;margin: 0;"><b> Busca todas os pagamentos</b></p>
-		<p style="color:green; margin: 0;"><b> Get /payments</b></p>
-	</div>
-	
-	<div style="background-color:E1E1E1;margin-top: 0; padding-top: 4px">
-		<p style="font-size:14px; padding-bottom: 0px;margin: 0;"><b> Busca um pagamento por id, lembrar de remover os {}</b></p>		
-		<p style="color:green; margin: 0;"><b> Get /payments/{id}</b></p>
-	</div>
-	
-	<div style="background-color:B7B7B7;margin-top: 0; padding-top: 4px">
-		<p style="font-size:14px; padding-bottom: 0px;margin: 0;"><b> Busca todas os produtos</b></p>
-		<p style="color:green; margin: 0;"><b> Get /products</b></p>
-	</div>
-	
-	<div style="background-color:E1E1E1;margin-top: 0; padding-top: 4px">
-		<p style="font-size:14px; padding-bottom: 0px;margin: 0;"><b> Busca um produto por id, lembrar de remover os {}</b></p>			
-		<p style="color:green; margin: 0;"><b> Get /products/{id}</b></p>
-	</div>
-	
-<BR> <B><I>Entre outros que eu ainda não finalizei de codar</I></B>  
+    </div>
+    <div id="text-container" class="container">
+        <p>Possiveis requests que a aplicação suporta:</p>
+        <div id="funcionalidades">
+            <!--
+                NESSE ESPAÇO SÃO INSERIDOS TODOS OS ENDPOINTS
+            -->
+        </div>
+    </div>
 
-<HR>
 
-</BODY>  
 
-</HTML>
+    <script>
+        const funcionalidades = [
+            {
+                title: 'Busca todos so usuarios cadastrados',
+                verb: 'GET',
+                uri: '/users',
+                body: ''
+            },
+            {
+                title: 'Busca usuario por id, lembrar de remover os \'{}\'',
+                verb: 'GET',
+                uri: '/users/{id}',
+                body: ''
+            },
+            {
+                title: 'Deleta um usuario da base, lembrar de remover os {}',
+                verb: 'DELETE',
+                uri: '/users/{id}',
+                body: ''
+            },
+            {
+                title: 'Adiciona um novo usuario na base',
+                verb: 'POST',
+                uri: '/users',
+                body: '{ "name": "", "email": "", "phone": "", "password": "" }'
+            },
+            {
+                title: 'Altera um usuario na base, lembrar de remover os {}',
+                verb: 'PUT',
+                uri: '/users/{id}',
+                body: '{ "name": "", "email": "", "phone": "" }'
+            },
+            {
+                title: 'Busca todas as categorias',
+                verb: 'GET',
+                uri: '/categorias',
+                body: ''
+            },
+            {
+                title: 'Busca uma categoria por id, lembrar de remover os {}',
+                verb: 'GET',
+                uri: '/categories/{id}',
+                body: ''
+            },
+            {
+                title: 'Adiciona uma nova categoria na base',
+                verb: 'POST',
+                uri: '/categories',
+                body: '{ "name": "", "email": "", "phone": "" }'
+            },
+            {
+                title: 'Busca todas os pedidos',
+                verb: 'GET',
+                uri: '/orders',
+                body: ''
+            },
+            {
+                title: 'Busca uma categoria por id, lembrar de remover os {}',
+                verb: 'GET',
+                uri: '/orders/{id}',
+                body: ''
+            },
+            {
+                title: 'Busca todas os pagamentos',
+                verb: 'GET',
+                uri: '/payments',
+                body: ''
+            },
+            {
+                title: 'Busca um pagamento por id, lembrar de remover os {}',
+                verb: 'GET',
+                uri: '/payments/{id}',
+                body: ''
+            },
+            {
+                title: 'Busca todas os produtos',
+                verb: 'GET',
+                uri: '/products',
+                body: ''
+            },
+            {
+                title: 'Busca um produto por id, lembrar de remover os {}',
+                verb: 'GET',
+                uri: '/products/{id}',
+                body: ''
+            }
+
+        ];
+
+        function createEndpointItem(item = { title: '', uri: '', body: '', verb: '' }) {
+            let containerFuncionalidade = document.querySelector("#funcionalidades");
+            let divEndpointItem = document.createElement('div');
+            let divEndpointItemTitle = document.createElement('div');
+            let divEndpointItemUri = document.createElement('div');
+            let divEndpointItemBody = document.createElement('div');
+            let spanHttpVerb = document.createElement('span');
+
+            divEndpointItem.className = 'endpoint-item';
+            divEndpointItemTitle.className = 'endpoint-item-title';
+            divEndpointItemUri.className = 'endpoint-item-uri';
+            divEndpointItemBody.className = 'endpoint-item-body';
+            spanHttpVerb.className = 'endpoint-item-verb';
+
+            spanHttpVerb.innerText = item.verb;
+            divEndpointItemTitle.innerHTML = item.title;
+            divEndpointItemBody.innerHTML = item.body;
+            divEndpointItemUri.appendChild(spanHttpVerb);
+            divEndpointItemUri.innerHTML += item.uri;
+
+            divEndpointItem.appendChild(divEndpointItemTitle);
+            divEndpointItem.appendChild(divEndpointItemUri);
+            divEndpointItem.appendChild(divEndpointItemBody);
+
+            containerFuncionalidade.appendChild(divEndpointItem);
+        }
+        funcionalidades.map(item => createEndpointItem(item));
+    </script>
+</body>
+
+</html>
