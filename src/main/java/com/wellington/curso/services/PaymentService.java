@@ -4,10 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.wellington.curso.entities.Payment;
+import com.wellington.curso.entities.User;
 import com.wellington.curso.repositories.PaymentRepository;
+import com.wellington.curso.services.exceptions.OrderAlreadyWithPaymentException;
+import com.wellington.curso.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class PaymentService {
@@ -20,8 +24,33 @@ public class PaymentService {
 	}
 	
 	public Payment findById(Long id) {
-		Optional<Payment> obj = paymentRepository.findById(id);
 		
-		return obj.get();
+		try {
+			Optional<Payment> obj = paymentRepository.findById(id);
+			return obj.orElseThrow(() -> new ResourceNotFoundException(id));
+		} catch (RuntimeException e) {
+			throw new ResourceNotFoundException(id);
+		}
+
 	}
+	
+	public Payment insert(Payment payment) {
+		try {
+		return paymentRepository.save(payment);
+		}catch (DataIntegrityViolationException e) {
+			if(payment.getId() == null) {
+				throw new OrderAlreadyWithPaymentException();
+
+			} else {
+				throw new OrderAlreadyWithPaymentException(payment.getId());
+				
+			}
+		}
+	}
+	
+	public void remove(Long id) {
+		paymentRepository.deleteById(id);
+
+	}
+
 }

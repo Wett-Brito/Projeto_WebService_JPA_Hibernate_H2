@@ -88,6 +88,7 @@ public class Order implements Serializable{
 		}
 	}
 	
+	@JsonIgnore
 	public Payment getPayment() {
 		return payment;
 	}

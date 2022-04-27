@@ -1,7 +1,9 @@
 package com.wellington.curso.resources;
 
 import java.net.URI;
+import java.time.Instant;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.wellington.curso.entities.Order;
+import com.wellington.curso.entities.OrderItem;
+import com.wellington.curso.entities.Product;
 import com.wellington.curso.entities.User;
+import com.wellington.curso.entities.enums.OrderStatus;
 import com.wellington.curso.services.OrderService;
+import com.wellington.curso.services.ProductService;
 import com.wellington.curso.services.UserService;
 
 @RestController
@@ -29,6 +35,9 @@ public class OrderResource {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private ProductService productService;
 	
 	@GetMapping
 	public ResponseEntity<List<Order>> findAll(){
@@ -44,10 +53,19 @@ public class OrderResource {
 	
 	@PostMapping
 	public ResponseEntity<Order> insert(@RequestBody Order order){
+		
+		order.setMoment(Instant.now());
+		order.setOrderStatus(OrderStatus.WAINTING_PAYMENT);		
+		
 		User user = userService.findById(order.getClient().getId());
+		Set<OrderItem> products = productService.insertAllProducts(order.getItems(), order);
+		order.getItems().clear();
+		order.getItems().addAll(products);
+		
 		order.setClient(user);
-
+			
 		Order obj =  service.insert(order);		
+		
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).body(obj);
@@ -58,6 +76,7 @@ public class OrderResource {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
+	
 	
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<Order> update(@PathVariable Long id, @RequestBody Order order){

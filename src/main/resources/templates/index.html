@@ -219,9 +219,36 @@
                 uri: '/orders/{id}',
                 body: ''
             },
+            
+            {
+                title: 'Adiciona um pedido',
+                verb: 'POST',
+                uri: '/orders',
+                body: '{ "orderStatus": "WAINTING_PAYMENT", "client": { "id": 1 }, "items": [ { "quantity": 2, "price": 1250.0, "product": { "id": 5 } }, { "quantity": 1, "price": 1250.0, "product": { "id": 3 } } ]}'
+            },
+            
+            {
+                title: 'deletar um pedido da base, lembrar de remover os {}',
+                verb: 'DELETE',
+                uri: '/orders/{id}',
+                body: ''
+            },
+            
             {
                 title: 'Busca todas os pagamentos',
                 verb: 'GET',
+                uri: '/payments',
+                body: ''
+            },
+            {
+                title: 'Adiciona um pagamento a um pedido ja criado, id do body referente ao id do order',
+                verb: 'POST',
+                uri: '/payments',
+                body: '{ "id": ""}'
+            },
+            {
+                title: 'Remove um pagamento e modifica o status do pedido relacionado',
+                verb: 'DELETE',
                 uri: '/payments',
                 body: ''
             },

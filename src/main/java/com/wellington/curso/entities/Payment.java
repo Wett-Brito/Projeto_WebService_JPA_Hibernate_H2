@@ -59,7 +59,6 @@ public class Payment implements Serializable{
 		this.date = date;
 	}
 
-	@JsonIgnore
 	public Order getOrder() {
 		return order;
 	}

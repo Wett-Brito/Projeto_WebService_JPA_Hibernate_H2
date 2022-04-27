@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.wellington.curso.services.exceptions.DatabaseException;
 import com.wellington.curso.services.exceptions.NoIdException;
+import com.wellington.curso.services.exceptions.OrderAlreadyWithPaymentException;
 import com.wellington.curso.services.exceptions.ResourceNotFoundException;
 
 @ControllerAdvice
@@ -35,6 +36,14 @@ public class ResourceExceptionHandler {
 	@ExceptionHandler(NoIdException.class)
 	public ResponseEntity<StandardError> noIdException(NoIdException e, HttpServletRequest request){
 		String error = "/id on the URL is mandatory";
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(status).body(err);
+	}
+	
+	@ExceptionHandler(OrderAlreadyWithPaymentException.class)
+	public ResponseEntity<StandardError> orderAlreadyWithPaymentException(OrderAlreadyWithPaymentException e, HttpServletRequest request){
+		String error = "/id already has a payment associated";
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(status).body(err);

@@ -1,13 +1,16 @@
 package com.wellington.curso.services;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wellington.curso.entities.Order;
+import com.wellington.curso.entities.User;
 import com.wellington.curso.repositories.OrderRepository;
+import com.wellington.curso.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class OrderService {
@@ -21,8 +24,12 @@ public class OrderService {
 	
 	public Order findById(Long id) {
 		
-		Optional<Order> obj = repository.findById(id);
-		return obj.get();
+		try{
+			Optional<Order> obj = repository.findById(id);
+			return obj.get();
+		}catch (NoSuchElementException e) {
+			throw new ResourceNotFoundException(id);
+		}
 	}
 	
 	public Order insert(Order order) {
@@ -43,4 +50,5 @@ public class OrderService {
 	public void updateData(Order entity, Order order) {
 		entity.setOrderStatus(order.getOrderStatus());
 	}
+
 }
