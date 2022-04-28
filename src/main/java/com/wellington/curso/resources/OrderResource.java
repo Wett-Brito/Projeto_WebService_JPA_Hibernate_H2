@@ -23,6 +23,7 @@ import com.wellington.curso.entities.Product;
 import com.wellington.curso.entities.User;
 import com.wellington.curso.entities.enums.OrderStatus;
 import com.wellington.curso.services.OrderService;
+import com.wellington.curso.services.PaymentService;
 import com.wellington.curso.services.ProductService;
 import com.wellington.curso.services.UserService;
 
@@ -38,6 +39,9 @@ public class OrderResource {
 	
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private PaymentService paymentService;
 	
 	@GetMapping
 	public ResponseEntity<List<Order>> findAll(){
@@ -58,7 +62,7 @@ public class OrderResource {
 		order.setOrderStatus(OrderStatus.WAINTING_PAYMENT);		
 		
 		User user = userService.findById(order.getClient().getId());
-		Set<OrderItem> products = productService.insertAllProducts(order.getItems(), order);
+		Set<OrderItem> products = productService.insertAllProducts(order);
 		order.getItems().clear();
 		order.getItems().addAll(products);
 		
@@ -73,7 +77,7 @@ public class OrderResource {
 	
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id){
-		service.delete(id);
+		
 		return ResponseEntity.noContent().build();
 	}
 	
@@ -81,6 +85,7 @@ public class OrderResource {
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<Order> update(@PathVariable Long id, @RequestBody Order order){
 		Order obj = service.update(id, order);
+		
 		return ResponseEntity.ok().body(obj);
 		
 	}

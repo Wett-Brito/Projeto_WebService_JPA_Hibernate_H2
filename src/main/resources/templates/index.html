@@ -140,7 +140,7 @@
                     <span id="creator-name">Site criado por Wellington Brito
                     </span>
                     <br>
-                    Usando as tecnologias: <strong>Spring Boot, JPA/Hibernate, Heroku, postgeSQL, H2</strong>
+                    Usando as tecnologias: <strong>Spring Boot, JPA/Hibernate, Heroku, postgeSQL, H2, REST</strong>
                 </p>
             </div>
         </div>
@@ -208,6 +208,12 @@
                 body: '{ "name": "", "email": "", "phone": "" }'
             },
             {
+                title: 'Altere qualquer categoria, lembrar de remover os {}',
+                verb: 'PUT',
+                uri: '/categories/{id}',
+                body: '{ "name" : "example" }'
+            },
+            {
                 title: 'Busca todas os pedidos',
                 verb: 'GET',
                 uri: '/orders',
@@ -240,33 +246,59 @@
                 uri: '/payments',
                 body: ''
             },
+            
+			{
+                title: 'Busca um pagamento por id, lembrar de remover os {}',
+                verb: 'GET',
+                uri: '/payments/{id}',
+                body: ''
+            },
+            
             {
                 title: 'Adiciona um pagamento a um pedido ja criado, id do body referente ao id do order',
                 verb: 'POST',
                 uri: '/payments',
                 body: '{ "id": ""}'
             },
+            
             {
                 title: 'Remove um pagamento e modifica o status do pedido relacionado',
                 verb: 'DELETE',
                 uri: '/payments',
                 body: ''
             },
-            {
-                title: 'Busca um pagamento por id, lembrar de remover os {}',
-                verb: 'GET',
-                uri: '/payments/{id}',
-                body: ''
-            },
+            
             {
                 title: 'Busca todas os produtos',
                 verb: 'GET',
                 uri: '/products',
                 body: ''
             },
+            
             {
                 title: 'Busca um produto por id, lembrar de remover os {}',
                 verb: 'GET',
+                uri: '/products/{id}',
+                body: ''
+            },
+            
+            {
+                title: 'Adiciona um novo produto a base',
+                verb: 'POST',
+                uri: '/products',
+                body: '{ "name": "The Lord of the Rings","description": "Lorem ipsum dolor sit amet, consectetur.", "price": 90.5, "imgUrl": "", "categories": [ { "id": 2 } ]}'
+            },
+            
+            {
+                title: 'Atualiza qualquer produto da base',
+                verb: 'PUT',
+                uri: '/products/{id}',
+                body: '{ "name": "The Lord of the Rings", "description": "teste.", "price": 90.5, "imgUrl": ""}'
+            },
+            
+            {
+                title: 'Exclui qualquer produto da base',
+                verb: 'DELETE',
                 uri: '/products/{id}',
                 body: ''
             }
