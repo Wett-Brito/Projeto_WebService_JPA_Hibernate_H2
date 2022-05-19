@@ -8,7 +8,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.wellington.curso.entities.Payment;
-import com.wellington.curso.entities.User;
 import com.wellington.curso.repositories.PaymentRepository;
 import com.wellington.curso.services.exceptions.OrderAlreadyWithPaymentException;
 import com.wellington.curso.services.exceptions.ResourceNotFoundException;

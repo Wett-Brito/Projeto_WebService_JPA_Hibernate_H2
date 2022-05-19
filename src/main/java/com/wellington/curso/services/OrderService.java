@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.wellington.curso.entities.Order;
 import com.wellington.curso.entities.OrderItem;
-import com.wellington.curso.entities.User;
 import com.wellington.curso.repositories.OrderRepository;
 import com.wellington.curso.services.exceptions.ResourceNotFoundException;
 
