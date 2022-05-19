@@ -19,11 +19,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.wellington.curso.entities.Order;
 import com.wellington.curso.entities.OrderItem;
-import com.wellington.curso.entities.Product;
 import com.wellington.curso.entities.User;
 import com.wellington.curso.entities.enums.OrderStatus;
 import com.wellington.curso.services.OrderService;
-import com.wellington.curso.services.PaymentService;
 import com.wellington.curso.services.ProductService;
 import com.wellington.curso.services.UserService;
 
