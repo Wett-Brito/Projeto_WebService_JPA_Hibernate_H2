@@ -27,8 +27,14 @@ import com.wellington.curso.services.PaymentService;
 import com.wellington.curso.services.ProductService;
 import com.wellington.curso.services.UserService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping(value = "/orders")
+@Api(value = "Application Status", tags = { "Orders" })
 public class OrderResource {
 
 	@Autowired
@@ -40,21 +46,33 @@ public class OrderResource {
 	@Autowired
 	private ProductService productService;
 	
-	@Autowired
-	private PaymentService paymentService;
-	
+	@ApiOperation(value = "Lista todos os Pedidos", notes = "Lista todos os Pedidos", responseContainer = "List" )
+	@ApiResponses(value = { 
+			@ApiResponse(code = 200, message = "OK"),
+		    @ApiResponse(code = 500, message = "The resource you were trying to reach is not found") })
 	@GetMapping
 	public ResponseEntity<List<Order>> findAll(){
 		List<Order> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 	
+	@ApiOperation(value = "Lista um Pedido especifico", notes = "Lista um Pedido especifico", responseContainer = "List" )
+	@ApiResponses(value = { 
+			@ApiResponse(code = 200, message = "OK"),
+			@ApiResponse(code = 400, message = "Bad Request"),
+			@ApiResponse(code = 404, message = "Resource not found"),
+		    @ApiResponse(code = 500, message = "The resource you were trying to reach is not found") })
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Order> findById(@PathVariable Long id){
 		Order obj =  service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@ApiOperation(value = "Cria um novo Pedido", notes = "Cria um novo Pedido", responseContainer = "List" )
+	@ApiResponses(value = { 
+			@ApiResponse(code = 201, message = "Created"),
+			@ApiResponse(code = 400, message = "Bad Request"),
+		    @ApiResponse(code = 500, message = "The resource you were trying to reach is not found") })
 	@PostMapping
 	public ResponseEntity<Order> insert(@RequestBody Order order){
 		
@@ -75,13 +93,23 @@ public class OrderResource {
 		return ResponseEntity.created(uri).body(obj);
 	}
 	
+	@ApiOperation(value = "Exclui um Pedido", notes = "Exclui um Pedido", responseContainer = "List" )
+	@ApiResponses(value = { 
+			@ApiResponse(code = 200, message = "OK"),
+			@ApiResponse(code = 400, message = "Database error"),
+			@ApiResponse(code = 404, message = "Resource not found"),
+		    @ApiResponse(code = 500, message = "The resource you were trying to reach is not found") })
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id){
 		
 		return ResponseEntity.noContent().build();
 	}
 	
-	
+	@ApiOperation(value = "Edita uma Pedido", notes = "Edita uma Pedido", responseContainer = "List" )
+	@ApiResponses(value = { 
+			@ApiResponse(code = 200, message = "OK"),
+			@ApiResponse(code = 400, message = "Bad Request"),
+		    @ApiResponse(code = 500, message = "The resource you were trying to reach is not found") })
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<Order> update(@PathVariable Long id, @RequestBody Order order){
 		Order obj = service.update(id, order);
