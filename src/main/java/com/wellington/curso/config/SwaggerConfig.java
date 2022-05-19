@@ -40,13 +40,12 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
 	private ApiInfo apiInfo() {
 		  
         ApiInfo apiInfo = new ApiInfoBuilder()
-                .title ("API de Avaliação de Livros")
-                .description ("Essa é a API de Avaliação de Livros.")
+                .title ("API de Compras de Produtos")
+                .description ("Essa é a API de um Sistema de Compras")
                 .license("Apache License Version 2.0")
                 .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0")
-                .termsOfServiceUrl("/service.html")
                 .version("1.0.0")
-	            .contact(new Contact("Wellington Santos Brito","www.linkedin.com/in/wellington-brito-b632ab135/", "wellingtonsantosbritos@gmail.com"))
+	            .contact(new Contact("Wellington Brito","https://www.linkedin.com/in/wellington-brito-b632ab135/", "wellingtonsantosbritos@gmail.com"))
                 .build();
  
         return apiInfo;
